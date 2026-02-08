@@ -3,13 +3,14 @@ package com.topcit.aims.aims.infrastructure.persistence.entity;
 import jakarta.persistence.*;
 
 import com.topcit.aims.aims.domain.model.Role;
+//import com.topcit.aims.aims.infrastructure.persistence.entity.Role;
 
 @Entity
 @Table(name = "users")
 public class UserJpaEntity {
     @Id
-    @GeneratedValue
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -24,10 +25,10 @@ public class UserJpaEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getUsername() {
@@ -57,7 +58,7 @@ public class UserJpaEntity {
         this.role = role;
     }
 
-    public UserJpaEntity(Integer id, String username, String email, String password, Role role) {
+    public UserJpaEntity(Long id, String username, String email, String password, Role role) {
         this.id = id;
         this.username = username;
         this.email = email;

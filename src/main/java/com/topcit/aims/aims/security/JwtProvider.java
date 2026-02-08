@@ -1,5 +1,6 @@
 package com.topcit.aims.aims.security;
 
+import com.topcit.aims.aims.domain.model.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -25,10 +26,10 @@ public class JwtProvider {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
     }
 
-    public String generateAccessToken(String username, String role) {
+    public String generateAccessToken(String username, Role role) {
         return Jwts.builder()
                 .setSubject(username)
-                .claim("role", role)
+                .claim("role", "ROLE_" + role.name())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + ACCESS_EXPIRE))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
@@ -43,6 +44,9 @@ public class JwtProvider {
     }
     public String getUsernameFromToken(String token) {
         return getClaims(token).getSubject();
+    }
+    public String getRoleFromToken(String token){
+        return getClaims(token).get("role", String.class);
     }
 }
 

@@ -29,11 +29,12 @@ public class LoginService {
         }
 
         String accessToken = jwtProvider.generateAccessToken(
-                user.getUsername(), user.getRole().name());
+                user.getUsername(), user.getRole());
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(user);
         return Map.of(
                 "accessToken", accessToken,
-                "refreshToken", refreshToken.getToken()
+                "refreshToken", refreshToken.getToken(),
+                "role", user.getRole().name()
         );
     }
 }
