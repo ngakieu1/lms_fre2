@@ -16,7 +16,7 @@ import java.util.UUID;
 public class RefreshTokenService {
     private final RefreshTokenRepository refreshTokenRepository;
 
-    private final long REFRESH_EXPIRE_DAYS = 7;
+    private final long REFRESH_EXPIRE_DAYS = 7; // ton tai trong vong 7 ngay
 
     @Transactional
     public RefreshToken createRefreshToken(UserJpaEntity user) {
@@ -37,5 +37,9 @@ public class RefreshTokenService {
             throw new RuntimeException("Refresh token expired");
         }
         return token;
+    }
+    @Transactional
+    public void logout(String refreshToken){
+        refreshTokenRepository.deleteByToken(refreshToken);
     }
 }
