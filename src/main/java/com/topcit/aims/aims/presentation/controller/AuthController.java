@@ -5,6 +5,7 @@ import com.topcit.aims.aims.application.LoginUseCase;
 import com.topcit.aims.aims.application.RefreshTokenService;
 import com.topcit.aims.aims.dto.request.LoginRequest;
 import com.topcit.aims.aims.dto.request.LogoutRequest;
+import com.topcit.aims.aims.dto.request.RefreshTokenRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +35,15 @@ public class AuthController {
         refreshTokenService.logout(request.getRefreshToken());
         return ResponseEntity.ok(Map.of(
                 "message", "Logged out successfully"
+        ));
+    }
+    @PostMapping("/refresh")
+    public ResponseEntity<?> refresh(@RequestBody RefreshTokenRequest request){
+        String newAccessToken = refreshTokenService.refreshAccessToken(
+                request.getRefreshToken()
+        );
+        return ResponseEntity.ok(Map.of(
+                "accessToken", newAccessToken
         ));
     }
 }
