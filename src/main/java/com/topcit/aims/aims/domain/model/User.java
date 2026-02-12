@@ -7,12 +7,9 @@ public class User {
     private Long id;
     private String username;
     private String password;
-//    private List<String> roles;
-//
-//    public boolean hasRole(String role) {
-//        return roles.contains(role);
-//    }
+
     private Role role;
+    private String phoneNumber;
 
     public Long getId() {
         return id;
@@ -46,11 +43,20 @@ public class User {
         this.role = role;
     }
 
-    public User(Long id, String username, String password, Role role) {
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public User(Long id, String username, String password, Role role, String phoneNumber) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
+        this.phoneNumber = phoneNumber;
     }
     public User(){
 

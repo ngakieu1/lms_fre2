@@ -25,6 +25,9 @@ public class UserJpaEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @Column(name = "phone_number", nullable = true)
+    private String phoneNumber;
+
     public Long getId() {
         return id;
     }
@@ -50,6 +53,14 @@ public class UserJpaEntity {
         this.password = password;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public Role getRole() {
         return role;
     }
@@ -58,12 +69,13 @@ public class UserJpaEntity {
         this.role = role;
     }
 
-    public UserJpaEntity(Long id, String username, String email, String password, Role role) {
+    public UserJpaEntity(Long id, String username, String email, String password, Role role, String phoneNumber) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.phoneNumber = phoneNumber;
     }
     public UserJpaEntity() {
     }
