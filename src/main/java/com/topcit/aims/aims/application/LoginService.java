@@ -34,7 +34,7 @@ public class LoginService {
         return Map.of(
                 "accessToken", accessToken,
                 "refreshToken", refreshToken.getToken(),
-                "role", user.getRole().name()
+                "role", user.getRole().getName()
         );
     }
 }

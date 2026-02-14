@@ -1,7 +1,6 @@
 package com.topcit.aims.aims.domain.model;
 
-import java.util.List;
-import com.topcit.aims.aims.domain.model.Role;
+import com.topcit.aims.aims.infrastructure.persistence.entity.Role;
 
 public class User {
     private Long id;

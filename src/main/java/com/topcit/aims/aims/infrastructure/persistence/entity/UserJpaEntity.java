@@ -2,9 +2,6 @@ package com.topcit.aims.aims.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
 
-import com.topcit.aims.aims.domain.model.Role;
-//import com.topcit.aims.aims.infrastructure.persistence.entity.Role;
-
 @Entity
 @Table(name = "users")
 public class UserJpaEntity {
@@ -21,8 +18,8 @@ public class UserJpaEntity {
     @Column(name = "pass_word", nullable = false)
     private String password;
 
-    @Column(name = "roles", nullable = false)
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
     @Column(name = "phone_number", nullable = true)

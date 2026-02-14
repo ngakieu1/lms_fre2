@@ -23,7 +23,7 @@ public class OtpService {
         otpStorage.remove(username);
     }
     public void sendSms(String phoneNumber, String otp) {
-        // TODO: Integrate Twilio or generic SMS API here
+
         System.out.println("========================================");
         System.out.println("SENDING SMS TO " + phoneNumber);
         System.out.println("YOUR OTP CODE IS: " + otp);
