@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<UserJpaEntity, Integer> {
     Optional<UserJpaEntity> findByUsername(String username);
+    boolean existsByRoleId(Long roleId);
 }
