@@ -20,7 +20,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -37,11 +40,20 @@ public class AuthController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/login")
-    public Map<String, String> login(@RequestBody LoginRequest request) {
-        return loginService.login(
+    public ResponseEntity<Map<String, Object>> login(@RequestBody LoginRequest request){
+        Map<String, String> tokenData = loginService.login(
                 request.getUsername(),
                 request.getPassword()
         );
+        UserJpaEntity user = userRepository.findByUsername(request.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        List<String> permissions = user.getRole().getPermissions().stream()
+                .map(permission -> permission.getCodePermission())
+                .collect(Collectors.toList());
+        Map<String, Object> response = new HashMap<>();
+        response.putAll(tokenData);
+        response.put("permissions", permissions);
+        return ResponseEntity.ok(response);
     }
     @PostMapping("/logout")
     public ResponseEntity<?> logout(@RequestBody LogoutRequest request){
