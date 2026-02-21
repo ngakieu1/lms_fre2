@@ -1,6 +1,7 @@
 package com.topcit.aims.aims.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 
 @Entity
 @Table(name = "users")
@@ -14,6 +15,9 @@ public class UserJpaEntity {
 
     @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(name = "full_name", nullable = false)
+    private String fullName;
 
     @Column(name = "pass_word", nullable = false)
     private String password;
@@ -66,13 +70,22 @@ public class UserJpaEntity {
         this.role = role;
     }
 
-    public UserJpaEntity(Long id, String username, String email, String password, Role role, String phoneNumber) {
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public UserJpaEntity(Long id, String username, String email, String password, Role role, String phoneNumber, String fullName) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.role = role;
         this.phoneNumber = phoneNumber;
+        this.fullName = fullName;
     }
     public UserJpaEntity() {
     }
